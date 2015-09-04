@@ -10,7 +10,7 @@ module ActiveRecord
 			def copy_permission_migration
 				puts "i am in copu"
 				#custom code
-					migration_template "permission_migration.rb", "db/migrate/create_permission.rb"
+					# migration_template "permission_migration.rb", "db/migrate/create_permission.rb"
 				#ciustom code
 				if (behavior == :invoke && model_exists?) || (behavior == :revoke && migration_exists?(table_name))
 					migration_template "migration_existing.rb", "db/migrate/add_permission_to_#{table_name}.rb"
@@ -28,7 +28,8 @@ module ActiveRecord
 			def generate_model_permission
 				puts "i am in permission model"
 				permission = "Permission"
-				Rails::Generators.invoke("active_record:model", [permission], {migration: false, timestamps: true})
+				Rails::Generators.invoke("active_record:model", [permission,"is_read:boolean", "is_update:boolean", 
+					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "user:references"], {migration: true, timestamps: true})
 								
 				# invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
 			end
