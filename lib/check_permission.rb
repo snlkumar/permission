@@ -20,11 +20,11 @@ module CheckPermission
 		permission = current_user.permissions.where(resource_name: resource).last
 		return false if permission.nil?
 		case action.to_sym			
-		when :index
+		when :index, :show
 			return permission.read_only		
 		when :create
 			return permission.create_only				
-		when :update			
+		when :update, :edit			
 			return permission.update_only				 
 		when :destroy, :delete			
 			return permission.destroy_only		
