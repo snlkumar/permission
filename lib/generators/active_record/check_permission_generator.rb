@@ -2,8 +2,7 @@ require 'rails/generators/active_record'
 require 'generators/check_permission/orm_helpers'
 module ActiveRecord
 	module Generators
-		class CheckPermissionGenerator < ActiveRecord::Generators::Base
-			puts "start permission g"
+		class CheckPermissionGenerator < ActiveRecord::Generators::Base			
 			argument :attributes, type: :array, default: [], banner: "field:type field:type"
 			include CheckPermission::Generators::OrmHelpers
 			source_root File.expand_path("../templates", __FILE__)
@@ -38,8 +37,7 @@ module ActiveRecord
 			end
 
 			def migration_data
-<<RUBY
-				## Database authenticatable					
+<<RUBY				
 				t.string :email
 				t.string :name		
 RUBY

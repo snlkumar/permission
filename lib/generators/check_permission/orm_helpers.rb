@@ -1,7 +1,6 @@
 module CheckPermission
 	module Generators
-		module OrmHelpers		
-			p "orm helper"	
+		module OrmHelpers			
 			def model_contents
 				buffer = <<-CONTENT
 				# Add has_many here for the permission for.
@@ -13,27 +12,6 @@ module CheckPermission
 				CONTENT
 				buffer
 			end
-
-			# def permission_model_contents
-			# 	buffer = <<-CONTENT
-			# 	# Add belongs_to here for the permission for.
-			# 	belongs_to :user
-			# 	CONTENT
-			# 	buffer += <<-CONTENT
-			# 	# Setup accessible (or protected) attributes for your model				
-			# 	CONTENT
-			# 	buffer
-			# end
-			# # def needs_attr_accessible?
-			# # 	rails_3? && !strong_parameters_enabled?
-			# # end
-			# # def rails_3?
-			# # 	Rails::VERSION::MAJOR == 3
-			# # end
-			# # def strong_parameters_enabled?
-			# # 	defined?(ActionController::StrongParameters)
-			# # end
-
 			private
 			def permission_model_exists?
 				File.exists?(File.join(destination_root, permission_model_path))
@@ -55,8 +33,7 @@ module CheckPermission
 
 			def permission_model_path
 				@permission_model_path ||= File.join("app", "models", "permission.rb")
-			end		
-			p "end helper"
+			end					
 		end
 	end
 end
