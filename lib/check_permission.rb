@@ -10,19 +10,19 @@ module CheckPermission
 		rescue
 			return raise "current_user is nil"
 		else
-			return result permission, resource
+			return result permission, resource, action
 		end		
 	end
 
 	private
 
-	def result permission, resource		
+	def result permission, resource, action		
 		permission = current_user.permissions.where(resource_name: resource).last
 		return false if permission.nil?
 		case action.to_sym			
 		when :index, :show
 			return permission.read_only		
-		when :create
+		when :create, :new
 			return permission.create_only				
 		when :update, :edit			
 			return permission.update_only				 
