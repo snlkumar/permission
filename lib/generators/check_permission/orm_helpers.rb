@@ -6,6 +6,7 @@ module CheckPermission
 				buffer = <<-CONTENT
 				# Add has_many here for the permission for.
 				has_many :permissions
+				accepts_nested_attributes_for :permissions
 				CONTENT
 				buffer += <<-CONTENT
 				# Setup accessible (or protected) attributes for your model				
@@ -13,16 +14,16 @@ module CheckPermission
 				buffer
 			end
 
-			def permission_model_contents
-				buffer = <<-CONTENT
-				# Add belongs_to here for the permission for.
-				belongs_to :user
-				CONTENT
-				buffer += <<-CONTENT
-				# Setup accessible (or protected) attributes for your model				
-				CONTENT
-				buffer
-			end
+			# def permission_model_contents
+			# 	buffer = <<-CONTENT
+			# 	# Add belongs_to here for the permission for.
+			# 	belongs_to :user
+			# 	CONTENT
+			# 	buffer += <<-CONTENT
+			# 	# Setup accessible (or protected) attributes for your model				
+			# 	CONTENT
+			# 	buffer
+			# end
 			# # def needs_attr_accessible?
 			# # 	rails_3? && !strong_parameters_enabled?
 			# # end
