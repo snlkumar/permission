@@ -22,7 +22,49 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+	rails g check_permission:install
+
+	It will create the permission.rb . Define the model in permission.rb, applying the permission for
+	::Permission_for = [Post]
+    
+    rails g check_permission User
+
+    It will create the migrations for the user and permission and it will create the models for the same.
+
+    Create form for assinging the permissions.
+    in UsersController
+
+    def new
+    	@user = User.new
+    	Permission_for.each do |model|
+    		@user.permissions.build(resource_name: model)
+    	end
+    end
+
+    In _form.html.erb
+
+    <%= form_for @user do |f|%
+    	--	stuff --
+	    <%= f.fields_for :permissions do |p|%>    
+	      <tr>
+	        <%=p.hidden_field :resource_name%>
+	        <td><%=p.object.resource_name%></td>
+	        <td><%=p.check_box :is_read%></td>
+	        <td><%=p.check_box :is_create%></td>
+	        <td><%=p.check_box :is_update%></td>
+	        <td><%=p.check_box :is_destroy%></td>
+
+	      </tr>
+	  	<% end %>
+	<%end%
+
+	Call in controller or view has_permission
+
+	def edit
+		-- do stuff --
+	end if has_permission
+
+	has_permission work with current_user (logged_in) only.
 
 ## Development
 
