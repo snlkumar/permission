@@ -19,17 +19,28 @@ module ActiveRecord
 				end
 			end
 			def generate_model
-				puts "i am in gmodel #{name} and #{model_exists?}"
-				per = "Permission"				
-				invoke "active_record:model", [name], migration: false
-				# invoke "active_record:model", [name], migration: false unless model_exists? && behavior == :invoke
-				invoke "active_record:model", [per], migration: false
+				puts "i am in gmodel #{name} and #{model_exists?}"				
+				invoke "active_record:model", [name], migration: false unless model_exists? && behavior == :invoke				
 			end
 
-			# def generate_permission_model
-			# 	puts "i am in gmodel"
-			# 	invoke "active_record:model", [name], migration: false unless model_exists? && behavior == :invoke
-			# end
+			def generate_permission_model
+				per = "Permission"				
+				invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
+			end
+
+			def inject_permission_content
+				content = permission_model_contents
+				class_path = if namespaced?
+					class_name.to_s.split("::")
+				else
+					[class_name]
+				end
+				# indent_depth = class_path.size - 1
+				# content = content.split("\n").map { |line| " " * indent_depth + line } .join("\n") << "\n"
+				# inject_into_class(model_path, class_path.last, content) if model_exists?
+				inject_into_class(permission_model_path, class_path.last, content)
+			end
+
 			def inject_permission_content
 				content = model_contents
 				class_path = if namespaced?
@@ -39,8 +50,7 @@ module ActiveRecord
 				end
 				indent_depth = class_path.size - 1
 				content = content.split("\n").map { |line| " " * indent_depth + line } .join("\n") << "\n"
-				inject_into_class(model_path, class_path.last, content) if model_exists?
-				inject_into_class(permission_model_path, class_path.last, permission_model_contents)
+				inject_into_class(model_path, class_path.last, content) if model_exists?				
 			end
 			def permission_migration_data
 <<RUBY

@@ -34,9 +34,14 @@ module CheckPermission
 			# # end
 
 			private
+			def permission_model_exists?
+				File.exists?(File.join(destination_root, permission_model_path))
+			end
+
 			def model_exists?
 				File.exists?(File.join(destination_root, model_path))
 			end
+
 			def migration_exists?(table_name)
 				Dir.glob("#{File.join(destination_root, migration_path)}/[0-9]*_*.rb").grep(/\d+_#{table_name}.rb$/).first
 			end
@@ -48,7 +53,7 @@ module CheckPermission
 			end	
 
 			def permission_model_path
-				@model_path ||= File.join("app", "models", "permission.rb")
+				@permission_model_path ||= File.join("app", "models", "permission.rb")
 			end		
 			p "end helper"
 		end
