@@ -21,6 +21,7 @@ module ActiveRecord
 			def generate_model
 				puts "i am in gmodel #{name} and #{model_exists?}"				
 				invoke "active_record:model", [name], migration: false unless model_exists? && behavior == :invoke				
+				generate_permission_model
 			end
 
 			def generate_permission_model
