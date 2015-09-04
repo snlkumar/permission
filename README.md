@@ -31,9 +31,9 @@ Or install it yourself as:
 
     It will create the migrations for the user and permission and it will create the models for the same.
 
-    Create form for assinging the permissions.
+    Create form for assinging the permissions.    
     in UsersController
-
+    
     def new
     	@user = User.new
     	Permission_for.each do |model|
@@ -45,21 +45,11 @@ Or install it yourself as:
 
     <%= form_for @user do |f|%
     	--	stuff --
-	    <%= f.fields_for :permissions do |p|%>    
-	      <tr>
-	        <%=p.hidden_field :resource_name%>
-	        <td><%=p.object.resource_name%></td>
-	        <td><%=p.check_box :is_read%></td>
-	        <td><%=p.check_box :is_create%></td>
-	        <td><%=p.check_box :is_update%></td>
-	        <td><%=p.check_box :is_destroy%></td>
-
-	      </tr>
-	  	<% end %>
+	    <%= render 'permissions/permissions', f: f%>
 	<%end%
 
 	Call in controller or view has_permission
-
+	include PermissionsHelper in application controller
 	def edit
 		-- do stuff --
 	end if has_permission
