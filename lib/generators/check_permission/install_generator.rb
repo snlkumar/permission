@@ -10,7 +10,7 @@ module CheckPermission
 			end
 
 			# def create_migration
-			# 	create_file Rails.root.join("config", "initializers", "permission.rb"), "#Permission_for = [Page, Category]"
+			# 	Rails::Generators.invoke("active_record:model", [name, "list_order:string", "name:string"], {migration: true, timestamps: true})
 			# end
 		end	
 end

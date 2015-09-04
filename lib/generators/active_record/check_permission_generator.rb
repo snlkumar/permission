@@ -19,13 +19,14 @@ module ActiveRecord
 				end
 			end
 			def generate_model
-				per = "Permission"	
-				puts "i am in gmodel #{name} and #{model_exists?}  #{permission_model_exists?}"				
+				# per = "Permission"	
+				# puts "i am in gmodel #{name} and #{model_exists?}  #{permission_model_exists?}"				
 				invoke "active_record:model", [name], migration: false unless model_exists? && behavior == :invoke				
-				invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
+				# invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
 			end
 
-			def generate_permission_model
+			def generate_model_permission
+				puts "i am in permission model"
 				per = "Permission"				
 				invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
 			end
