@@ -2,7 +2,7 @@ require "check_permission/version"
 
 module CheckPermission
    def has_permission
-   		p "in check permission"
+   		p "in check permission with #{params}"
 		# resource = params[:controller].singularize.camelize
 		# action = params[:action]
 		# begin
