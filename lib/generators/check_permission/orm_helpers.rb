@@ -30,8 +30,17 @@ module CheckPermission
 				buffer
 			end
 			private
-			def permission_model_exists?
+
+			def permission_view_exists?
+				File.exists?(File.join(destination_root, permission_view_path))
+			end
+
+			def permissions_helper_exists?
 				File.exists?(File.join(destination_root, permission_model_path))
+			end
+
+			def model_exists?
+				File.exists?(File.join(destination_root, model_path))
 			end
 
 			def model_exists?
@@ -48,9 +57,13 @@ module CheckPermission
 				@model_path ||= File.join("app", "models", "#{file_path}.rb")
 			end	
 
-			def permission_model_path
-				@permission_model_path ||= File.join("app", "models", "permission.rb")
-			end					
+			def permission_helper_path
+				@permission_helper_path ||= File.join("app", "helpers", "permissions_helper.rb")
+			end	
+
+			def permission_view_path
+				@permission_view_path ||= File.join("app", "views", "permissions" "permissions_helper.rb")
+			end				
 		end
 	end
 end

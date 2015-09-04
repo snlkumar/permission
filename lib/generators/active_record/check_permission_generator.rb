@@ -8,7 +8,7 @@ module ActiveRecord
 			source_root File.expand_path("../templates", __FILE__)
 			def copy_permission_migration				
 				if (behavior == :invoke && model_exists?) || (behavior == :revoke && migration_exists?(table_name))
-					migration_template "migration_existing.rb", "db/migrate/add_permission_to_#{table_name}.rb"
+					# migration_template "migration_existing.rb", "db/migrate/add_permission_to_#{table_name}.rb"
 				else
 					migration_template "migration.rb", "db/migrate/permission_create_#{table_name}.rb"
 				end
@@ -25,7 +25,18 @@ module ActiveRecord
 
 			def generate_view
 				create_file Rails.root.join("app", "views", "permissions", "_permissions.html.rb"), "#{partial_content}"		
-			end
+			end unless permission_view_exists?
+
+			def generate_helper
+				create_file Rails.root.join("app", "helpers", "permissions_helper.rb"), "
+				module PermissionsHelper
+					include CheckPermission
+					def has_permission		
+						super(params)
+					end
+				end
+				"
+			end unless permissions_helper_exists?
 
 			def inject_permission_content
 				content = model_contents
