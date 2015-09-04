@@ -22,23 +22,8 @@ module ActiveRecord
 				puts "i am in permission model #{name}"
 				permission = "Permission"
 				Rails::Generators.invoke("active_record:model", [permission,"is_read:boolean", "is_update:boolean", 
-					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "user:references"], {migration: true, timestamps: true})
-								
-				# invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
+					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "#{name.table_name.singularize}:references"], {migration: true, timestamps: true})				
 			end
-
-			# def inject_permission_content
-			# 	content = permission_model_contents
-			# 	class_path = if namespaced?
-			# 		class_name.to_s.split("::")
-			# 	else
-			# 		[class_name]
-			# 	end
-			# 	# indent_depth = class_path.size - 1
-			# 	# content = content.split("\n").map { |line| " " * indent_depth + line } .join("\n") << "\n"
-			# 	# inject_into_class(model_path, class_path.last, content) if model_exists?
-			# 	inject_into_class(permission_model_path, class_path.last, content)
-			# end
 
 			def inject_permission_content
 				content = model_contents
@@ -51,17 +36,6 @@ module ActiveRecord
 				content = content.split("\n").map { |line| " " * indent_depth + line } .join("\n") << "\n"
 				inject_into_class(model_path, class_path.last, content) if model_exists?				
 			end
-# 			def permission_migration_data
-# <<RUBY
-# 				## Database authenticatable
-# 					t.references :user
-# 					t.boolean :is_read, default: false
-# 					t.boolean :is_update, default: false
-# 					t.boolean :is_create, default: false
-# 					t.boolean :is_destroy, default: false
-# 					t.string :resource_name, null: false			
-# RUBY
-# 			end
 
 			def migration_data
 <<RUBY
@@ -69,22 +43,7 @@ module ActiveRecord
 				t.string :email
 				t.string :name		
 RUBY
-			end
-			# def ip_column
-			# 	# Padded with spaces so it aligns nicely with the rest of the columns.
-			# 	"%-8s" % (inet? ? "inet" : "string")
-			# end
-			# def inet?
-			# 	rails4? && postgresql?
-			# end
-			# def rails4?
-			# 	Rails.version.start_with? '4'
-			# end
-			# def postgresql?
-			# 	config = ActiveRecord::Base.configurations[Rails.env]
-			# 	config && config['adapter'] == 'postgresql'
-			# end
-			# puts "end of generator"
+			end			
 		end	
 	end
 end
