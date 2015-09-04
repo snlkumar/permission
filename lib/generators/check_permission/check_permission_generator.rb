@@ -4,7 +4,7 @@ module CheckPermission
 		class CheckPermissionGenerator < Rails::Generators::NamedBase
 			include Rails::Generators::ResourceHelpers
 			puts "pemission base name estart"
-			namespace "checkpermission"			
+			namespace "check_permission"			
 			source_root File.expand_path("../templates", __FILE__)
 			desc "Generates a model with the given NAME (if one does not exist) with permission " <<
 			"configuration plus a migration file."

@@ -1,6 +1,7 @@
 module CheckPermission
 	module Generators
-		module OrmHelpers			
+		module OrmHelpers		
+			p "orm helper"	
 			def model_contents
 				buffer = <<-CONTENT
 				# Add has_many here for the permission for.
@@ -49,6 +50,7 @@ module CheckPermission
 			def permission_model_path
 				@model_path ||= File.join("app", "models", "permission.rb")
 			end		
+			p "end helper"
 		end
 	end
 end
