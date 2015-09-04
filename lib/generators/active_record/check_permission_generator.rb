@@ -24,8 +24,8 @@ module ActiveRecord
 			end
 
 			def generate_view
-				create_file Rails.root.join("app", "views", "permissions", "_permissions.html.rb"), "#{partial_content}"		
-			end unless permission_view_exists?
+				create_file Rails.root.join("app", "views", "permissions", "_permissions.html.rb"), "#{partial_content}" unless permission_view_exists?	
+			end 
 
 			def generate_helper
 				create_file Rails.root.join("app", "helpers", "permissions_helper.rb"), "
@@ -35,8 +35,8 @@ module ActiveRecord
 						super(params)
 					end
 				end
-				"
-			end unless permissions_helper_exists?
+				" unless permissions_helper_exists?
+			end 
 
 			def inject_permission_content
 				content = model_contents
