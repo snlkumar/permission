@@ -22,7 +22,7 @@ module ActiveRecord
 				puts "i am in permission model #{name}"
 				permission = "Permission"
 				Rails::Generators.invoke("active_record:model", [permission,"is_read:boolean", "is_update:boolean", 
-					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "#{name.table_name.singularize}:references"], {migration: true, timestamps: true})				
+					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "#{table_name.singularize}:references"], {migration: true, timestamps: true})				
 			end
 
 			def inject_permission_content
