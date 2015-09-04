@@ -17,8 +17,7 @@ module ActiveRecord
 					invoke "active_record:model", [name], migration: false unless model_exists? && behavior == :invoke								
 			end
 
-			def generate_model_permission
-				puts "i am in permission model #{name}"
+			def generate_model_permission				
 				permission = "Permission"
 				Rails::Generators.invoke("active_record:model", [permission,"is_read:boolean", "is_update:boolean", 
 					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "#{table_name.singularize}:references"], {migration: true, timestamps: true})				
