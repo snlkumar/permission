@@ -27,8 +27,10 @@ module ActiveRecord
 
 			def generate_model_permission
 				puts "i am in permission model"
-				per = "Permission"				
-				invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
+				permission = "Permission"
+				Rails::Generators.invoke("active_record:model", [permission], {migration: false, timestamps: true})
+								
+				# invoke "active_record:model", [per], migration: false unless permission_model_exists? && behavior == :invoke
 			end
 
 			def inject_permission_content
