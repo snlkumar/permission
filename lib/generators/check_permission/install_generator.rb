@@ -7,5 +7,14 @@ module CheckPermission
 		def create_initializer_file
 			create_file Rails.root.join("config", "initializers", "permission.rb"), "#::Permission_for = [Page, Category]"
 		end
+
+		def create_helper
+			create_file Rails.root.join("config", "helpers", "permissions_helper.rb"), "
+				include CheckPermission
+				def has_permission		
+					super(params)
+				end
+			"
+		end
 	end	
 end
