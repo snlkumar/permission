@@ -1,11 +1,11 @@
 require 'rails/generators/active_record'
-require 'generators/permission/orm_helpers'
+require 'generators/check_permission/orm_helpers'
 module ActiveRecord
 	module Generators
-		class PermissionGenerator < ActiveRecord::Generators::Base
+		class CheckPermissionGenerator < ActiveRecord::Generators::Base
 			puts "start permission g"
 			argument :attributes, type: :array, default: [], banner: "field:type field:type"
-			include Permission::Generators::OrmHelpers
+			include CheckPermission::Generators::OrmHelpers
 			source_root File.expand_path("../templates", __FILE__)
 			def copy_permission_migration
 				puts "i am in copu"
