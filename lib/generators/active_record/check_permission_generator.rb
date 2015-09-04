@@ -23,6 +23,10 @@ module ActiveRecord
 					"is_create:boolean", "is_destroy:boolean", "resource_name:string", "#{table_name.singularize}:references"], {migration: true, timestamps: true})				
 			end
 
+			def generate_view
+				create_file Rails.root.join("app", "views", "permissions", "_permissions.html.rb"), "#{partial_content}"		
+			end
+
 			def inject_permission_content
 				content = model_contents
 				class_path = if namespaced?

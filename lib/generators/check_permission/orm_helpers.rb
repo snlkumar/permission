@@ -12,6 +12,23 @@ module CheckPermission
 				CONTENT
 				buffer
 			end
+
+			def partial_content
+				buffer = <<-CONTENT
+				<%= f.fields_for :permissions do |p|%>    
+				  <tr>
+				    <%=p.hidden_field :resource_name%>
+				    <td><label><%=p.object.resource_name%></label></td><br>
+				    <td><label><%=p.check_box :is_read%> Is Read?</label></td>
+				    <td><label><%=p.check_box :is_create%> Is Create</label></td>
+				    <td><label><%=p.check_box :is_update%> Is Update</label></td>
+				    <td><label><%=p.check_box :is_destroy%> Is Destroy</label></td>
+
+				  </tr>
+				<% end %>
+				CONTENT
+				buffer
+			end
 			private
 			def permission_model_exists?
 				File.exists?(File.join(destination_root, permission_model_path))
