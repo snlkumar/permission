@@ -21,13 +21,13 @@ module CheckPermission
 		return false if permission.nil?
 		case action.to_sym			
 		when :index, :show
-			return permission.read_only		
+			return permission.is_read		
 		when :create, :new
-			return permission.create_only				
+			return permission.is_create				
 		when :update, :edit			
-			return permission.update_only				 
+			return permission.is_update			 
 		when :destroy, :delete			
-			return permission.destroy_only		
+			return permission.is_destroy		
 		else
 			return false
 		end
